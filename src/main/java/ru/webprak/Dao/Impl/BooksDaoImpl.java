@@ -65,7 +65,7 @@ public class BooksDaoImpl implements BooksDao {
     public List<Books> readListByAuthor(@NotNull String author) {
 
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        Query<Books> query = session.createQuery("FROM Books WHERE author = :param", Books.class).setParameter("param", author);
+        Query<Books> query = session.createQuery("FROM Books WHERE author like :param", Books.class).setParameter("param", author);
         List<Books> obj = query.list();
         session.close();
         return obj;
