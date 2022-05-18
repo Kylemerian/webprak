@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+        .indent {
+            margin-left: 30px;
+            margin-right: 30px;
+            margin-top: 20px;
+        }
+    </style>
+    <title></title>
+</head>
+
+<body>
+<div th:replace="patterns :: page-header"></div>
+<div class="indent">
+    <div id="bookInfo">
+        <h4 th:text="${book.getTitle()}"></h4>
+        <p th:text="'Авторы: ' + ${book.getAuthor()}"></p>
+        <p th:if="${book.getPub_year() != null}" th:text="'Год издания: ' + ${book.getPub_year()}"></p>
+        <p th:if="${book.getIsbn() != null}" th:text="'ISBN: ' + ${book.getIsbn()}"></p>
+        <p th:if="${book.getPub_house() != null}" th:text="'Издательство: ' + ${book.getPub_house()}"></p>
+        <p th:if="${book.getGenre() != null}" th:text="'Жанр: ' + ${book.getGenre()}"></p>
+        <p th:text="'Количество экземпляров: ' + ${book.getAmount()}"></p>
+        <p th:text="'Количество свободных экземпляров: ' + ${book.getFreeAmount()}"></p>
+        <p th:if="${instance != null}" th:text="'Номер экземпляра: ' + ${instance.getInstance_id()}"></p>
+        <p th:if="${instance != null and instance.getIs_free()}" th:text="'Доступность: ' + ${instance.getIs_free()}" class="text-success"></p>
+        <p th:if="${instance != null and !instance.getIs_free()}" th:text="'Доступность: ' + ${instance.getIs_free()}" class="text-danger"></p>
+        <div>
+            <a th:if="${instance != null and instance.getIs_free()}"  th:href="'/add_order?' + 'book_id=' + ${book.getBook_id()} + '&instance_id=' + ${instance.getInstance_id()}" >
+                <button id="addOrderButton" type="submit" class="btn btn-danger">Добавить выдачу книги</button>
+            </a>
+        </div>
+        <br>
+        <div>
+            <a th:if="${instance != null}"  th:href="'/orders?' + 'book_id=' + ${book.getBook_id()} + '&instance_id=' + ${instance.getInstance_id()}" >
+                <button type="submit" class="btn btn-danger">Просмотр выдач этого экземпляра</button>
+            </a>
+        </div>
+        <br>
+        <div>
+            <form method="post" action="/book">
+            <a th:if="${instance == null}" >
+                <input type="text" required th:value="${book.getBook_id()}" hidden name="book_id">
+                <input type="text" required placeholder="Номер экземпляра" name="instanceID">
+                <button type="submit" class="btn btn-danger">Просмотр экземпляра</button>
+            </a>
+        </div>
+        <br>
+    </div>
+
+    <!--edit delete order button group-->
+    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+        <div class="btn-group mr-2" role="group" aria-label="First group">
+            <form style="margin-right: 30px" method="get" action="/add_book">
+                <input type="hidden" name="id" th:value="${book.getBook_id()}"/>
+                <button id="editButton" type="submit" class="btn btn-danger">Редактировать информацию о книге</button>
+            </form>
+            <br>
+            <form method="post" action="/delete_book">
+                <input type="hidden" name="id" th:value="${book.getBook_id()}"/>
+                <button id="deleteButton" type="submit" class="btn btn-danger">Удалить книгу из базы</button>
+            </form>
+        </div>
+    </div>
+    <!--end of button group-->
+
+</div>
+<div th:replace="patterns :: site-footer"></div>
+<div th:replace="patterns :: site-script"></div>
+
+</body>
+</html>

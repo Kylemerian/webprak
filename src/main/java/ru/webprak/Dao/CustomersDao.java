@@ -10,4 +10,6 @@ public interface CustomersDao {
     void delete(Customers customer);
     Customers readByID(int id);
     List<Customers> readCustomers();
+    List<Customers> readCustomersByFirstName(String name);
+    List<Customers> readCustomersByLastName(String name);
 }

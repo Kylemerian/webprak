@@ -46,10 +46,26 @@ public class CustomersDaoImpl implements CustomersDao {
     @Override
     public List<Customers> readCustomers() {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        session.beginTransaction();
         Query<Customers> query = session.createQuery("FROM Customers ", Customers.class);
         List<Customers> obj = query.list();
-        session.getTransaction().commit();
+        session.close();
+        return obj;
+    }
+
+    @Override
+    public List<Customers> readCustomersByFirstName(String name) {
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Query<Customers> query = session.createQuery("FROM Customers where firstname = :param", Customers.class).setParameter("param", name);
+        List<Customers> obj = query.list();
+        session.close();
+        return obj;
+    }
+
+    @Override
+    public List<Customers> readCustomersByLastName(String name) {
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Query<Customers> query = session.createQuery("FROM Customers where lastname = :param", Customers.class).setParameter("param", name);
+        List<Customers> obj = query.list();
         session.close();
         return obj;
     }

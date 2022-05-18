@@ -8,6 +8,7 @@ public interface InstancesDao {
     void update(Instances instance);
     void delete(Instances instance);
     Instances readByID(int id);
+    Instances readByBookIdByInstanceId(int book_id, int instance_id);
     List<Instances> readInstancesById(int book);
     List<Instances> readInstances();
 }

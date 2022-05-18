@@ -13,8 +13,8 @@ public class OrdersService {
         ordersDao.create(order);
     }
 
-    public List<Orders> readOrdersByCustomerId(Customers customer) {
-        return ordersDao.readOrdersById(customer.getCustomer_id());
+    public List<Orders> readOrdersByCustomerId(int customer) {
+        return ordersDao.readOrdersById(customer);
     }
 
     public List<Orders> readOrders() {
@@ -32,4 +32,5 @@ public class OrdersService {
     public Orders readOrderByID(int id) {
         return ordersDao.readByID(id);
     }
+    public List<Orders> readOrdersByUniqueBookId(int uniq){return  ordersDao.readOrdersByUniqueBookId(uniq);}
 }

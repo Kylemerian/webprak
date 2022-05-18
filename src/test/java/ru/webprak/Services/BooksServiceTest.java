@@ -17,9 +17,7 @@ public class BooksServiceTest {
         bookService.createBook(new_book);
 
         Books check_book = bookService.readBookByID(new_book.getBook_id());
-
-        Assert.assertEquals(new_book, check_book);
-
+        assertEquals(new_book, check_book);
         bookService.deleteBook(new_book);
     }
 
@@ -30,8 +28,9 @@ public class BooksServiceTest {
         bookService.createBook(new_book);
         Books check_book = bookService.readBookByID(new_book.getBook_id());
         assertEquals(new_book, check_book);
+        int s = new_book.getBook_id();
         bookService.deleteBook(new_book);
-        check_book = bookService.readBookByID(new_book.getBook_id());
+        check_book = bookService.readBookByID(s);
         Assert.assertNull(check_book);
     }
 
@@ -70,10 +69,16 @@ public class BooksServiceTest {
                 new Books(40,  "Война и мир 4", "Л.Н. Толстой", "Рассказ", "Эксмо 0", 2014, 30, "12323"),
                 new Books(40,  "Война и мир 5", "Л.Н. Толстой", "Роман", "Эксмо 4", 2015, 30, "12323")
         );
+        for(Books x : expected_list){
+            bookService.createBook(x);
+        }
         List<Books> list_of_books = bookService.readBooksListByGenre("Роман");
         Assert.assertEquals(list_of_books.size(), 2);
         Assert.assertTrue(expected_list.contains(list_of_books.get(0)));
         Assert.assertTrue(expected_list.contains(list_of_books.get(1)));
+        for(Books x : expected_list){
+            bookService.deleteBook(x);
+        }
     }
 
     @Test
@@ -86,11 +91,17 @@ public class BooksServiceTest {
                 new Books(40,  "Война и мир 4", "Л.Н. Толстой", "Рассказ", "Эксмо 0", 2014, 30, "12323"),
                 new Books(40,  "Война и мир 5", "Л.Н. Толстой", "Роман", "Эксмо 4", 2015, 30, "12323")
         );
+        for(Books x : expected_list){
+            bookService.createBook(x);
+        }
         List<Books> list_of_books = bookService.readBooksListByPubHouse("Эксмо 0");
         Assert.assertEquals(list_of_books.size(), 3);
         Assert.assertTrue(expected_list.contains(list_of_books.get(0)));
         Assert.assertTrue(expected_list.contains(list_of_books.get(1)));
         Assert.assertTrue(expected_list.contains(list_of_books.get(2)));
+        for(Books x : expected_list){
+            bookService.deleteBook(x);
+        }
     }
 
     @Test
@@ -103,11 +114,17 @@ public class BooksServiceTest {
                 new Books(40,  "Война и мир 4", "Л.Н. Толстой", "Рассказ", "Эксмо 0", 2014, 30, "12323"),
                 new Books(40, "Война и мир 5", "Л.Н. Толстой", "Роман", "Эксмо 4", 2015, 30, "12323")
         );
+        for(Books x : expected_list){
+            bookService.createBook(x);
+        }
         List<Books> list_of_books = bookService.readBooksListByAuthor("Л.Н. Толстой");
         Assert.assertEquals(list_of_books.size(), 3);
         Assert.assertTrue(expected_list.contains(list_of_books.get(0)));
         Assert.assertTrue(expected_list.contains(list_of_books.get(1)));
         Assert.assertTrue(expected_list.contains(list_of_books.get(2)));
+        for(Books x : expected_list){
+            bookService.deleteBook(x);
+        }
     }
 
     @Test
@@ -120,9 +137,13 @@ public class BooksServiceTest {
                 new Books(40,  "Война и мир 4", "Л.Н. Толстой", "Рассказ", "Эксмо 0", 2014, 30, "12323"),
                 new Books(40, "Война и мир 5", "Л.Н. Толстой", "Роман", "Эксмо 4", 2015, 30, "12323")
         );
+        for (Books x: expected_list)
+            bookService.createBook(x);
         List<Books> list_of_books = bookService.readBooksListByTitle("Война и мир 3");
-        Assert.assertEquals(list_of_books.size(), 1);
+        Assert.assertEquals(1, list_of_books.size());
         Assert.assertTrue(expected_list.contains(list_of_books.get(0)));
+        for(Books x: expected_list)
+            bookService.deleteBook(x);
     }
 
     @Test
@@ -153,13 +174,19 @@ public class BooksServiceTest {
                 new Books(40,  "Война и мир 4", "Л.Н. Толстой", "Рассказ", "Эксмо 0", 2014, 30, "12323"),
                 new Books(40, "Война и мир 5", "Л.Н. Толстой", "Роман", "Эксмо 4", 2015, 30, "12323")
         );
+        for(Books x : expected_list){
+            bookService.createBook(x);
+        }
         List<Books> list_of_books = bookService.readAllBooks();
-        Assert.assertEquals(list_of_books.size(), expected_list.size());
+        Assert.assertEquals(expected_list.size(), list_of_books.size());
         Assert.assertTrue(expected_list.contains(list_of_books.get(0)));
         Assert.assertTrue(expected_list.contains(list_of_books.get(1)));
         Assert.assertTrue(expected_list.contains(list_of_books.get(2)));
         Assert.assertTrue(expected_list.contains(list_of_books.get(3)));
         Assert.assertTrue(expected_list.contains(list_of_books.get(4)));
+        for(Books x : expected_list){
+            bookService.deleteBook(x);
+        }
     }
 
 //

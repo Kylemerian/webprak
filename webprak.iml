@@ -21,7 +21,13 @@
       </configuration>
     </facet>
     <facet type="Spring" name="Spring">
-      <configuration />
+      <configuration>
+        <fileset id="fileset" name="WebConfig" removed="false">
+          <file>file://$MODULE_DIR$/src/main/java/ru/webprak/Config/WebConfig.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/ru/webprak/WebprakApplication.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/ru/webprak/Controllers/ServingWebContentApplication.java</file>
+        </fileset>
+      </configuration>
     </facet>
     <facet type="hibernate" name="Hibernate">
       <configuration>
@@ -132,5 +138,8 @@
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.13.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:2.2" level="project" />
     <orderEntry type="library" name="Maven: org.jetbrains:annotations:23.0.0" level="project" />
+    <orderEntry type="library" name="bootstrap" level="application" />
+    <orderEntry type="library" name="jquery-3.3.1.slim" level="application" />
+    <orderEntry type="library" name="twitter-bootstrap" level="application" />
   </component>
 </module>

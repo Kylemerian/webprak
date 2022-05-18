@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+        .indent {
+            margin-left: 30px;
+            margin-right: 30px;
+            margin-top: 20px;
+        }
+    </style>
+    <title></title>
+</head>
+
+<body>
+<div th:replace="patterns :: page-header"></div>
+<div class="indent">
+    <div id="orderInfo">
+        <h4 th:text="'Номер выдачи - ' + ${order.getOrder_id()}"></h4>
+        <p th:text="'Номер читательского билета: ' + ${order.getCustomer_id()}"></p>
+        <p th:text="'Дата выдачи: ' + ${order.getOrder_time()}"></p>
+        <p th:text="'Дата возврата: ' + ${order.getReturn_time()}"></p>
+        <p th:text="'Книга: ' + ${bookService.readBookByID(instanceService.readInstancesByID(order.getBook_id()).getBook_id()).getTitle()}"></p>
+        <p th:text="'Номер экземпляра: ' + ${instanceService.readInstancesByID(order.getBook_id()).getInstance_id()}"></p>
+    </div>
+
+    <!--edit delete order button group-->
+    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+        <div class="btn-group mr-2" role="group" aria-label="First group">
+            <form method="post" action="/delete_order">
+                <input type="hidden" name="id" th:value="${order.getOrder_id()}"/>
+                <button id="deleteButton" type="submit" class="btn btn-danger">Удалить выдачу книг</button>
+            </form>
+            <form th:if="${!instanceService.readInstancesByID(order.getBook_id()).getIs_free()}" method="post" action="/order">
+                <input type="hidden" name="id" th:value="${order.getOrder_id()}"/>
+                <button type="submit" class="btn btn-danger">Книга возвращена</button>
+            </form>
+        </div>
+    </div>
+    <!--end of button group-->
+
+</div>
+<div th:replace="patterns :: site-footer"></div>
+<div th:replace="patterns :: site-script"></div>
+
+</body>
+</html>

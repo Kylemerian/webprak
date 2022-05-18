@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Ошибка</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+    <div th:replace="patterns :: page-header"></div>
+        <div class="error-box">
+            <div class="error-body text-center">
+                <h1 class="text-danger">404</h1>
+                <h3>Страницы не существует!</h3>
+                <a href="/" class="btn btn-danger btn-rounded m-b-40">На главную</a> </div>
+        </div>
+    <div th:replace="patterns :: site-footer"></div>
+    <div th:replace="patterns :: site-script"></div>
+</body>
+</html>

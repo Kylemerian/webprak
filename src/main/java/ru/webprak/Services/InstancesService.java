@@ -32,4 +32,6 @@ public class InstancesService {
     public Instances readInstancesByID(int id) {
         return instancesDao.readByID(id);
     }
+
+    public Instances readByBookIdByInstanceId(int book_id, int instance_id){return instancesDao.readByBookIdByInstanceId(book_id, instance_id);}
 }

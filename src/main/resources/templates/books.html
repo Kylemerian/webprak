@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Книги</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+        .indent {
+            margin-left: 30px;
+            margin-right: 30px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div th:replace="patterns :: page-header"></div>
+<div class="indent">
+    <form method="get" action="/add_book">
+        <button id="addBookButton" type="submit" class="btn btn-danger">Добавить книгу</button>
+    </form>
+    <br>
+
+    <form method="post" action="/books">
+        <input type="text" id="title" name="title" placeholder="Название" style="margin-bottom: 6px"><br>
+
+        <input type="text" id="author" name="author" placeholder="Автор" style="margin-bottom: 6px"><br>
+
+        <input type="text" id="genre" name="genre" placeholder="Жанр" style="margin-bottom: 6px"><br>
+
+        <input id="submitButton" type="submit" value="Фильтровать" class="btn btn-danger" style="margin-bottom: -10px">
+    </form>
+    <br>
+
+    <table class="table table-bordered table-warning">
+        <thead class="bg-success">
+        <tr>
+            <th scope="col"> Название</th>
+            <th scope="col"> Авторы</th>
+            <th scope="col"> Год издания</th>
+            <th scope="col"> ISBN</th>
+            <th scope="col"> Издательство</th>
+            <th scope="col"> Жанр</th>
+            <th scope="col"> Количество экземпляров</th>
+            <th scope="col"> Количество свободных экземпляров</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${books.isEmpty()}" class="table-light">
+            <td colspan="8"> По вашему запросу книг не найдено. <a href="/add_book" class = "text-success">Добавить?</a></td>
+        </tr>
+        <tr th:each="book : ${books}" class="table-light">
+            <td>
+                <a th:href="'/book?id=' + ${book.getBook_id()}" class = "text-success">
+                    <span th:text="${book.getTitle()}"> </span>
+                </a>
+            </td>
+            <td>
+                <span th:text="${book.getAuthor()}"> </span>
+            </td>
+            <td>
+                <span th:text="${book.getPub_year()}"> </span>
+            </td>
+            <td>
+                <span th:text="${book.getIsbn()}"> </span>
+            </td>
+            <td>
+                <span th:text="${book.getPub_house()}"> </span>
+            </td>
+            <td>
+                <span th:text="${book.getGenre()}"> </span>
+            </td>
+            <td>
+                <span th:text="${book.getAmount()}"> </span>
+            </td>
+            <td>
+                <span th:text="${book.getFreeAmount()}"> </span>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div th:replace="patterns :: site-footer"></div>
+<div th:replace="patterns :: site-script"></div>
+
+</body>
+</html>

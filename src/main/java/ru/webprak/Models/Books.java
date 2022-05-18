@@ -4,11 +4,11 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "books")
+@Table(name = "Books")
 public class Books
 {
     public Books(int amount, String title, String author,
-                        String genre, String pub_house, int pub_year, int free_amount, String isbn) {
+                        String genre, String pub_house, Integer pub_year, int free_amount, String isbn) {
         this.amount = amount;
         this.isbn = isbn;
         this.title = title;
@@ -96,7 +96,7 @@ public class Books
         this.pub_house = pub_house;
     }
 
-    public int getPub_year() {
+    public Integer getPub_year() {
         return pub_year;
     }
 
@@ -115,7 +115,7 @@ public class Books
                 (this.author.equals(other.author)) &&
                 (this.genre.equals(other.genre)) &&
                 (this.pub_house.equals(other.pub_house)) &&
-                (this.pub_year == other.pub_year) &&
+                (Objects.equals(this.pub_year, other.pub_year)) &&
                 (this.isbn.equals(other.isbn)) &&
                 (this.free_amount == other.free_amount));
     }
@@ -124,7 +124,7 @@ public class Books
     @Column(name = "author") private String author;
     @Column(name = "genre") private String genre;
     @Column(name = "p_house") private String pub_house;
-    @Column(name = "year") private int pub_year;
+    @Column(name = "year") private Integer pub_year;
     @Column(name = "free_amount") private int free_amount;
     @Column(name = "isbn") private String isbn;
 }

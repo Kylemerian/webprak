@@ -34,6 +34,12 @@ public class InstancesDaoImpl implements InstancesDao {
         tx1.commit();
         session.close();
     }
+    @Override
+    public Instances readByBookIdByInstanceId(int book_id, int instance_id){
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Query<Instances> query = session.createQuery("FROM Instances WHERE book_id = :param AND instance_id = :param2", Instances.class).setParameter("param", book_id).setParameter("param2", instance_id);
+        return query.getSingleResult();
+    }
 
     @Override
     public Instances readByID(int id) {
@@ -55,10 +61,8 @@ public class InstancesDaoImpl implements InstancesDao {
     @Override
     public List<Instances> readInstances() {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        session.beginTransaction();
         Query<Instances> query = session.createQuery("FROM Instances", Instances.class);
         List<Instances> obj = query.list();
-        session.getTransaction().commit();
         session.close();
         return obj;
     }

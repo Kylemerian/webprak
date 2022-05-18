@@ -47,10 +47,14 @@ public class OrdersDaoImpl implements OrdersDao {
     public List<Orders> readOrdersById(int customer) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         Query<Orders> query = session.createQuery("FROM Orders WHERE customer_id = :param", Orders.class).setParameter("param", customer);
-        if (query.getResultList().size() == 0) {
-            return null;
-        }
-        return query.getResultList();
+        return query.list();
+    }
+
+    @Override
+    public List<Orders> readOrdersByUniqueBookId(int uniq) {
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        Query<Orders> query = session.createQuery("FROM Orders WHERE book_id = :param", Orders.class).setParameter("param", uniq);
+        return query.list();
     }
     @Override
     public List<Orders> readOrders() {

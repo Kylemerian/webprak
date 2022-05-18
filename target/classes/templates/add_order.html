@@ -1,0 +1,45 @@
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <title>Редактировать читателя</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+        .indent {
+            margin-left: 30px;
+            margin-right: 30px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="patterns :: page-header"> </div>
+
+<div class="indent">
+    <form method="post" action="/add_order">
+
+        <input type="text" id="customer_id" name="customer_id" required placeholder="Номер читательского" style="margin-bottom: 6px"><br>
+
+        <input th:if="${book_id == null}" type="text" id="book_id" name="book_id" required placeholder="ID книги" style="margin-bottom: 6px"><br>
+
+        <input th:if="${book_id != null}" type="hidden" name="book_id" th:value="${book_id}" placeholder="ID книги" style="margin-bottom: 6px"><br>
+
+        <input type="text" id="order_date" name="order_date" required placeholder="Дата выдачи" style="margin-bottom: 6px"><br>
+
+        <input type="text" id="return_date" name="return_date" required placeholder="Дата возврата" style="margin-bottom: 6px"><br>
+
+        <input th:if="${instance_id == null}" type="text" id="instance_id" name="instance_id" required placeholder="Номер экземпляра" style="margin-bottom: 6px"><br>
+
+        <input th:if="${instance_id != null}" type="hidden" name="instance_id" th:value="${instance_id}" placeholder="Телефон" style="margin-bottom: 6px"><br>
+
+        <input id="submitButton" type="submit" value="Сохранить" class="btn btn-danger" style="margin-bottom: -10px">
+    </form>
+</div>
+
+<div th:replace="patterns :: site-footer"></div>
+<div th:replace="patterns :: site-script"></div>
+
+</body>
+</html>

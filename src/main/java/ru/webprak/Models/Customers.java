@@ -3,7 +3,7 @@ package ru.webprak.Models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "customers")
+@Table(name = "Customers")
 public class Customers
 {
     public Customers(String lastname, String firstname,

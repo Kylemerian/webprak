@@ -10,4 +10,5 @@ public interface OrdersDao {
     Orders readByID(int id);
     List<Orders> readOrdersById(int customer);
     List<Orders> readOrders();
+    public List<Orders> readOrdersByUniqueBookId(int uniq);
 }
