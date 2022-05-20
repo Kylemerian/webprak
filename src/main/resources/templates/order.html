@@ -10,8 +10,22 @@
             margin-right: 30px;
             margin-top: 20px;
         }
+        .btn {
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            padding: 17px 39px;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.14);
+            text-transform: uppercase;
+            box-shadow: 0 4px 9px 0 rgba(0, 0, 0, 0.2);
+        }
+        .btn-sm {
+            font-size: 12px;
+            padding: 11px 25px;
+        }
     </style>
-    <title></title>
+    <title>Информация о выдаче</title>
 </head>
 
 <body>
@@ -31,11 +45,14 @@
         <div class="btn-group mr-2" role="group" aria-label="First group">
             <form method="post" action="/delete_order">
                 <input type="hidden" name="id" th:value="${order.getOrder_id()}"/>
-                <button id="deleteButton" type="submit" class="btn btn-danger">Удалить выдачу книг</button>
+                <button id="deleteButton" type="submit" class="btn btn-outline-danger btn-sm">Удалить выдачу книг</button>
             </form>
+        </div>
+        <br>
+        <div>
             <form th:if="${!instanceService.readInstancesByID(order.getBook_id()).getIs_free()}" method="post" action="/order">
                 <input type="hidden" name="id" th:value="${order.getOrder_id()}"/>
-                <button type="submit" class="btn btn-danger">Книга возвращена</button>
+                <button type="submit" id="returnButton" class="btn btn-outline-danger btn-sm">Книга возвращена</button>
             </form>
         </div>
     </div>

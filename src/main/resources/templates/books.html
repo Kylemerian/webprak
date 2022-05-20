@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
 <head>
     <title>Книги</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -11,6 +11,20 @@
             margin-right: 30px;
             margin-top: 20px;
         }
+        .btn {
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            padding: 17px 39px;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.14);
+            text-transform: uppercase;
+            box-shadow: 0 4px 9px 0 rgba(0, 0, 0, 0.2);
+        }
+        .btn-sm {
+            font-size: 12px;
+            padding: 11px 25px;
+        }
     </style>
 </head>
 <body>
@@ -18,7 +32,7 @@
 <div th:replace="patterns :: page-header"></div>
 <div class="indent">
     <form method="get" action="/add_book">
-        <button id="addBookButton" type="submit" class="btn btn-danger">Добавить книгу</button>
+        <button id="addBookButton" type="submit" class="btn btn-outline-danger btn-sm">Добавить книгу</button>
     </form>
     <br>
 
@@ -29,7 +43,7 @@
 
         <input type="text" id="genre" name="genre" placeholder="Жанр" style="margin-bottom: 6px"><br>
 
-        <input id="submitButton" type="submit" value="Фильтровать" class="btn btn-danger" style="margin-bottom: -10px">
+        <input id="submitButton" type="submit" value="Фильтровать" class="btn btn-outline-danger btn-sm" style="margin-bottom: -10px">
     </form>
     <br>
 

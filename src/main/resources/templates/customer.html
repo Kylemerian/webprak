@@ -10,8 +10,22 @@
             margin-right: 30px;
             margin-top: 20px;
         }
+        .btn {
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            padding: 17px 39px;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.14);
+            text-transform: uppercase;
+            box-shadow: 0 4px 9px 0 rgba(0, 0, 0, 0.2);
+        }
+        .btn-sm {
+            font-size: 12px;
+            padding: 11px 25px;
+        }
     </style>
-    <title></title>
+    <title>Информация о читателе</title>
 </head>
 
 <body>
@@ -19,7 +33,7 @@
 <div class="indent">
     <div id="customerInfo">
         <h4 th:text="${customer.getLastname()} + ' ' + ${customer.getFirstname()}"></h4>
-        <p th:if="${customer.getFirstname() != null}" th:text="'Номер читательского билета: ' + ${customer.getCustomer_id()}"></p>
+        <p th:text="'Номер читательского билета: ' + ${customer.getCustomer_id()}"></p>
         <p th:if="${customer.getAddress() != null}" th:text="'Адрес: ' + ${customer.getAddress()}"></p>
         <p th:if="${customer.getPhone_number() != null}" th:text="'Телефон: ' + ${customer.getPhone_number()}"></p>
         <p th:if="${customer.getMail() != null}" th:text="'Почта: ' + ${customer.getMail()}"></p>
@@ -30,13 +44,20 @@
         <div class="btn-group mr-2" role="group" aria-label="First group">
             <form style="margin-right: 30px" method="get" action="/add_customer">
                 <input type="hidden" name="id" th:value="${customer.getCustomer_id()}"/>
-                <button id="editButton" type="submit" class="btn btn-danger">Редактировать информацию о человеке</button>
+                <button id="editButton" type="submit" class="btn btn-outline-danger btn-sm">Редактировать информацию о человеке</button>
             </form>
-            <form method="post" action="/delete_customer">
+            <form style="margin-right: 30px" method="post" action="/delete_customer">
                 <input type="hidden" name="id" th:value="${customer.getCustomer_id()}"/>
-                <button id="deleteButton" type="submit" class="btn btn-danger">Удалить читателя</button>
+                <button id="deleteButton" type="submit" class="btn btn-outline-danger btn-sm">Удалить читателя</button>
             </form>
         </div>
+    </div>
+    <br>
+    <div>
+        <form method="post" action="/orders">
+            <input type="hidden" id="customer_id" name="customer_id" th:value="${customer.getCustomer_id()}"/>
+            <button id="ordersButton" type="submit" class="btn btn-outline-danger btn-sm">Посмотреть выдачи читателя</button>
+        </form>
     </div>
     <!--end of button group-->
 

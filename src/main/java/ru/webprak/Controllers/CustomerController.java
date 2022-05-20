@@ -41,7 +41,7 @@ public class CustomerController {
                                  @RequestParam(name = "customerPhone", required = false) String phone){
         Customers res;
         if(id == null) {
-            Customers customer = new Customers(lastname, name, phone, address, email);
+            Customers customer = new Customers(lastname, name, address, phone, email);
             customersService.createCustomer(customer);
             res = customer;
         }

@@ -10,8 +10,22 @@
             margin-right: 30px;
             margin-top: 20px;
         }
+        .btn {
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            padding: 17px 39px;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.14);
+            text-transform: uppercase;
+            box-shadow: 0 4px 9px 0 rgba(0, 0, 0, 0.2);
+        }
+        .btn-sm {
+            font-size: 12px;
+            padding: 11px 25px;
+        }
     </style>
-    <title></title>
+    <title>Информация о книге</title>
 </head>
 
 <body>
@@ -31,13 +45,13 @@
         <p th:if="${instance != null and !instance.getIs_free()}" th:text="'Доступность: ' + ${instance.getIs_free()}" class="text-danger"></p>
         <div>
             <a th:if="${instance != null and instance.getIs_free()}"  th:href="'/add_order?' + 'book_id=' + ${book.getBook_id()} + '&instance_id=' + ${instance.getInstance_id()}" >
-                <button id="addOrderButton" type="submit" class="btn btn-danger">Добавить выдачу книги</button>
+                <button id="addOrderButton" type="submit" class="btn btn-outline-danger btn-sm">Добавить выдачу книги</button>
             </a>
         </div>
         <br>
         <div>
             <a th:if="${instance != null}"  th:href="'/orders?' + 'book_id=' + ${book.getBook_id()} + '&instance_id=' + ${instance.getInstance_id()}" >
-                <button type="submit" class="btn btn-danger">Просмотр выдач этого экземпляра</button>
+                <button id="checkOrderButton" type="submit" class="btn btn-outline-danger btn-sm">Просмотр выдач этого экземпляра</button>
             </a>
         </div>
         <br>
@@ -45,9 +59,10 @@
             <form method="post" action="/book">
             <a th:if="${instance == null}" >
                 <input type="text" required th:value="${book.getBook_id()}" hidden name="book_id">
-                <input type="text" required placeholder="Номер экземпляра" name="instanceID">
-                <button type="submit" class="btn btn-danger">Просмотр экземпляра</button>
+                <input type="number" id="instanceID" required placeholder="Номер экземпляра" name="instanceID">
+                <button id="checkInstButton" type="submit" class="btn btn-outline-danger btn-sm">Просмотр экземпляра</button>
             </a>
+            </form>
         </div>
         <br>
     </div>
@@ -55,14 +70,13 @@
     <!--edit delete order button group-->
     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
         <div class="btn-group mr-2" role="group" aria-label="First group">
-            <form style="margin-right: 30px" method="get" action="/add_book">
+            <form method="get" style="margin-right: 30px" action="/add_book">
                 <input type="hidden" name="id" th:value="${book.getBook_id()}"/>
-                <button id="editButton" type="submit" class="btn btn-danger">Редактировать информацию о книге</button>
+                <button id="editButton" type="submit" class="btn btn-outline-danger btn-sm">Редактировать информацию о книге</button>
             </form>
-            <br>
-            <form method="post" action="/delete_book">
-                <input type="hidden" name="id" th:value="${book.getBook_id()}"/>
-                <button id="deleteButton" type="submit" class="btn btn-danger">Удалить книгу из базы</button>
+            <form th:if="${book.getAmount() == book.getFreeAmount()}" method="post" action="/delete_book">
+                <input type="hidden" name="id"  th:value="${book.getBook_id()}"/>
+                <button id="deleteButton" type="submit" class="btn btn-outline-danger btn-sm">Удалить книгу из базы</button>
             </form>
         </div>
     </div>

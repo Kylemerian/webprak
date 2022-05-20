@@ -2,7 +2,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" lang="ru">
 <head>
-    <title>Редактировать читателя</title>
+    <title>Редактировать книгу</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -11,6 +11,20 @@
             margin-left: 30px;
             margin-right: 30px;
             margin-top: 20px;
+        }
+        .btn {
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            padding: 17px 39px;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.14);
+            text-transform: uppercase;
+            box-shadow: 0 4px 9px 0 rgba(0, 0, 0, 0.2);
+        }
+        .btn-sm {
+            font-size: 12px;
+            padding: 11px 25px;
         }
     </style>
 </head>
@@ -31,7 +45,7 @@
         <input th:if="${id != null}" hidden  type="text" required th:value="${bookService.readBookByID(id).getAuthor()}" name="authors" placeholder="Авторы" style="margin-bottom: 6px">
         <br>
 
-        <input type="text" id="publ_year" name="publ_year" placeholder="Год издания" style="margin-bottom: 6px"><br>
+        <input type="number" id="publ_year" class="input-number" name="publ_year" placeholder="Год издания" style="margin-bottom: 6px"><br>
 
         <input type="text" id="isbn" name="isbn" placeholder="ISBN" style="margin-bottom: 6px"><br>
 
@@ -39,11 +53,13 @@
 
         <input type="text" id="genre" name="genre" placeholder="Жанр" style="margin-bottom: 6px"><br>
 
-        <input th:if="${id == null}" required type="text" id="amount" name="amount" placeholder="Количество экземпляров" style="margin-bottom: 6px">
+        <input th:if="${id == null}" class="input-number" required type="number" id="amount" name="amount" placeholder="Количество экземпляров" style="margin-bottom: 6px">
         <input th:if="${id != null}" hidden required type="text" th:value="${bookService.readBookByID(id).getAmount()}" name="amount" placeholder="Количество экземпляров" style="margin-bottom: 6px">
         <br>
 
-        <input id="submitButton" type="submit" value="Сохранить" class="btn btn-danger " style="margin-bottom: -10px">
+        <input id="submitButton" type="submit" value="Сохранить" class="btn btn-outline-danger btn-sm" style="margin-bottom: -10px">
+
+
     </form>
 </div>
 

@@ -42,7 +42,7 @@ public class BooksDaoImpl implements BooksDao {
         session.getTransaction().commit();
         InstancesDao iDao = new InstancesDaoImpl();
         for(int i = 0; i < book.getAmount(); i++)
-            iDao.delete(new Instances(book.getBook_id(), i + 1, true));
+            iDao.delete(iDao.readByBookIdByInstanceId(book.getBook_id(), i+1));
         session.close();
     }
 

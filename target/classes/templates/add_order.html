@@ -2,7 +2,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" lang="ru">
 <head>
-    <title>Редактировать читателя</title>
+    <title>Редактировать выдачу</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -11,6 +11,20 @@
             margin-left: 30px;
             margin-right: 30px;
             margin-top: 20px;
+        }
+        .btn {
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            padding: 17px 39px;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.14);
+            text-transform: uppercase;
+            box-shadow: 0 4px 9px 0 rgba(0, 0, 0, 0.2);
+        }
+        .btn-sm {
+            font-size: 12px;
+            padding: 11px 25px;
         }
     </style>
 </head>
@@ -22,7 +36,7 @@
 
         <input type="text" id="customer_id" name="customer_id" required placeholder="Номер читательского" style="margin-bottom: 6px"><br>
 
-        <input th:if="${book_id == null}" type="text" id="book_id" name="book_id" required placeholder="ID книги" style="margin-bottom: 6px"><br>
+        <input th:if="${book_id == null}" class="input-number" type="number" id="book_id" name="book_id" required placeholder="ID книги" style="margin-bottom: 6px"><br>
 
         <input th:if="${book_id != null}" type="hidden" name="book_id" th:value="${book_id}" placeholder="ID книги" style="margin-bottom: 6px"><br>
 
@@ -30,11 +44,11 @@
 
         <input type="text" id="return_date" name="return_date" required placeholder="Дата возврата" style="margin-bottom: 6px"><br>
 
-        <input th:if="${instance_id == null}" type="text" id="instance_id" name="instance_id" required placeholder="Номер экземпляра" style="margin-bottom: 6px"><br>
+        <input th:if="${instance_id == null}" class="input-number" type="number" id="instance_id" name="instance_id" required placeholder="Номер экземпляра" style="margin-bottom: 6px"><br>
 
         <input th:if="${instance_id != null}" type="hidden" name="instance_id" th:value="${instance_id}" placeholder="Телефон" style="margin-bottom: 6px"><br>
 
-        <input id="submitButton" type="submit" value="Сохранить" class="btn btn-danger" style="margin-bottom: -10px">
+        <input id="submitButton" type="submit" value="Сохранить" class="btn btn-outline-danger btn-sm" style="margin-bottom: -10px">
     </form>
 </div>
 
